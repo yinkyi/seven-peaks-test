@@ -1,6 +1,5 @@
 import { useContext } from 'react';
-import { IProduct, ProductsContext } from '../contexts/product-context';
-
+import { ProductsContext } from '../contexts/product-context';
 const Home: React.FC = () => {
   const { products: productList, toggleFavourite } = useContext(ProductsContext);
   console.log('productList', productList);

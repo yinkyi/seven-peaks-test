@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 
 export interface IProduct {
   id: number;
@@ -15,11 +15,24 @@ interface IProductsContext {
 
 export const ProductsContext = React.createContext<IProductsContext>({
   products: [],
-  toggleFavourite: (id: number) => {},
+  toggleFavourite: () => {},
 });
 
-export default (props: any) => {
-  const [productList, setProductList] = useState<IProduct[]>([
+type ProductsAction = { type: 'TOGGLE_FAVOURITE'; id: number };
+
+const ProductsReducer = (state: IProduct[], action: ProductsAction): IProduct[] => {
+  switch (action.type) {
+    case 'TOGGLE_FAVOURITE':
+      return state.map((product) =>
+        product.id === action.id ? { ...product, favourite: !product.favourite } : product,
+      );
+    default:
+      return state;
+  }
+};
+
+export default function ProductsProvider(props: any) {
+  const initialState: IProduct[] = [
     {
       id: 1,
       name: 'Test',
@@ -34,23 +47,28 @@ export default (props: any) => {
       description: 'baby baby',
       favourite: false,
     },
-  ]);
-  const toggleFavouriteFun = (id: number) => {
-    debugger;
-    setProductList((currentProductList) => {
-      const productIndex = currentProductList.findIndex((e) => e.id === id);
-      const newToggleFavourite = !currentProductList[productIndex].favourite;
-      const updateProduct = [...currentProductList];
-      updateProduct[productIndex].favourite = newToggleFavourite;
+  ];
 
-      return updateProduct;
+  const [productListState, productListDispatch] = useReducer(ProductsReducer, initialState);
+  const toggleFavouriteFun = (id: number) => {
+    productListDispatch({
+      type: 'TOGGLE_FAVOURITE',
+      id: id,
     });
+    // setProductList((currentProductList) => {
+    //   const productIndex = currentProductList.findIndex((e) => e.id === id);
+    //   const newToggleFavourite = !currentProductList[productIndex].favourite;
+    //   const updateProduct = [...currentProductList];
+    //   updateProduct[productIndex].favourite = newToggleFavourite;
+
+    //   return updateProduct;
+    // });
   };
   return (
     <ProductsContext.Provider
-      value={{ products: productList, toggleFavourite: toggleFavouriteFun }}
+      value={{ products: productListState, toggleFavourite: toggleFavouriteFun }}
     >
       {props.children}
     </ProductsContext.Provider>
   );
-};
+}
