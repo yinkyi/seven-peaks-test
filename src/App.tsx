@@ -1,9 +1,12 @@
 import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from './assets/vite.svg';
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { IinitialState, authAction } from './store/auth';
+import Index from './pages/Index';
+import { Route, Routes } from 'react-router-dom';
+import Product from './pages/Product';
+import ContactUs from './pages/ContactUs';
+import NotFound from './pages/NotFound';
 function App() {
   const [count, setCount] = useState(0);
   const auth = useSelector((state: IinitialState) => state.auth);
@@ -19,7 +22,13 @@ function App() {
   };
   return (
     <>
-      <div>
+      <Index />
+      <Routes>
+        <Route path='/' element={<Product />}></Route>
+        <Route path='/contact-us' element={<ContactUs />}></Route>
+        <Route path='*' element={<NotFound />}></Route>
+      </Routes>
+      {/* <div>
         <a href='https://vitejs.dev' target='_blank'>
           <img src={viteLogo} className='logo' alt='Vite logo' />
         </a>
@@ -34,7 +43,7 @@ function App() {
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
-      <p className='read-the-docs'>{auth.name}</p>
+      <p className='read-the-docs'>{auth.name}</p> */}
     </>
   );
 }
