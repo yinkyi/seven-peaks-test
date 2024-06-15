@@ -9,7 +9,10 @@ const MenuBar: React.FC = () => {
           <Link to={'/'}> Home </Link>
         </li>
         <li>
-          <Link to={'/contact-us'}> Contact Us </Link>
+          <Link to={'/contact-us'} state={{ id: 1 }}>
+            {' '}
+            Contact Us{' '}
+          </Link>
         </li>
         <li>
           <Link to={'/product'}> Product </Link>

@@ -7,6 +7,7 @@ import { Route, Routes } from 'react-router-dom';
 import Product from './pages/Product';
 import ContactUs from './pages/ContactUs';
 import NotFound from './pages/NotFound';
+import ProductDetail from './pages/ProductDetail';
 function App() {
   const [count, setCount] = useState(0);
   const auth = useSelector((state: IinitialState) => state.auth);
@@ -26,6 +27,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Product />}></Route>
         <Route path='/contact-us' element={<ContactUs />}></Route>
+        <Route path='/product/:id' element={<ProductDetail />}></Route>
         <Route path='*' element={<NotFound />}></Route>
       </Routes>
       {/* <div>
