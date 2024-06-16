@@ -18,7 +18,9 @@ export const ProductsContext = React.createContext<IProductsContext>({
   toggleFavourite: () => {},
 });
 
-type ProductsAction = { type: 'TOGGLE_FAVOURITE'; id: number };
+type ProductsAction =
+  | { type: 'TOGGLE_FAVOURITE'; id: number }
+  | { type: 'ADD_PRODUCT'; product: IProduct };
 
 const ProductsReducer = (state: IProduct[], action: ProductsAction): IProduct[] => {
   switch (action.type) {
