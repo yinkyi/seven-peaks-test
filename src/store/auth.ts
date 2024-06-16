@@ -1,11 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-export interface IinitialState {
-  auth: {
-    isAuth: boolean;
-    name: string;
-  };
-}
+import { IinitialState } from '../interface';
 
 const initialState: IinitialState['auth'] = {
   isAuth: false,

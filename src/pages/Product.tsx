@@ -1,6 +1,7 @@
 import React from 'react';
+import ProductForm from '../components/ProductForm';
 const Product: React.FC = () => {
-  return <h1>Product</h1>;
+  return <ProductForm />;
 };
 
 export default Product;
