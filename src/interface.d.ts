@@ -12,7 +12,11 @@ export interface IProductData {
   products: IProduct[];
 }
 
+export interface ITest {
+  test: string;
+}
 export interface IinitialState {
   auth: IAuth;
   item: IProductData;
+  test: ITest;
 }

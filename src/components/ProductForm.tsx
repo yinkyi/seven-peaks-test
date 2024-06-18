@@ -4,6 +4,8 @@ import { productAction } from '../store/product';
 import { IProduct, IinitialState } from '../interface';
 const ProductForm: React.FC = () => {
   const products = useSelector((state: IinitialState) => state.item.products);
+  const test = useSelector((state: IinitialState) => state.test);
+  console.log(test.test);
   const dispatch = useDispatch();
   const [productName, setProductName] = useState<string>('');
   const productRef = useRef<HTMLInputElement>(null);
@@ -35,6 +37,7 @@ const ProductForm: React.FC = () => {
         </button>
       </form>
       <div style={{ display: 'block' }}>
+        {test.test}
         {products &&
           products.map((product: IProduct) => {
             return (
